@@ -1,5 +1,13 @@
+import os
+import sys
 import asyncio
 from aiogram.utils.executor import start_polling
+
+def run_tests():
+    import pytest
+    tests = pytest.main(["-v", "tg_bot_template/tests"])
+    if tests != 0:
+        sys.exit(tests)
 
 from . import dp
 from .config.settings import settings
@@ -20,7 +28,10 @@ from .presentation.handlers import menu
 from .presentation.handlers import profile
 from .presentation.handlers import service
 
-
+def main():
+    if os.environ.get("RUN_TESTS") == "true":
+        run_tests()
+    start_polling(dp, skip_updates=True, on_startup=on_startup)
 
 if __name__ == "__main__":
-    start_polling(dp, skip_updates=True, on_startup=on_startup)
+    main()

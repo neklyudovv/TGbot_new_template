@@ -34,6 +34,8 @@ services:
     build: .
     env_file:
       - .env
+    environment:
+      - RUN_TESTS=true
     restart: always
     depends_on:
       - pg_db
