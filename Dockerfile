@@ -34,6 +34,6 @@ COPY tg_bot_template ./tg_bot_template/
 
 # run app
 ENTRYPOINT ["python", "-m"]
-CMD ["tg_bot_template.bot"]
+CMD ["tg_bot_template.main"]
 
 FROM app
