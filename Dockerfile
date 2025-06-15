@@ -12,7 +12,7 @@ FROM base as requirements-builder
 
 WORKDIR /build/
 
-RUN pip --no-cache-dir install poetry==1.5.1
+RUN pip --no-cache-dir install poetry==1.7.1
 
 COPY pyproject.toml poetry.lock /build/
 

@@ -2,7 +2,6 @@ import asyncio
 
 import aioschedule
 from aiogram import types
-from aiogram.utils import executor
 from loguru import logger
 
 from .. import dp
@@ -11,7 +10,6 @@ from tg_bot_template.infrastructure.tg.aiogram_ext import DbDispatcher
 from tg_bot_template.domain.services.feature_base import Feature
 from tg_bot_template.infrastructure.tg.utils import bot_safe_send_message
 from ..config.settings import settings
-from tg_bot_template.infrastructure.db.connection import setup_db
 
 
 async def healthcheck() -> None:
@@ -45,8 +43,3 @@ async def on_startup(dispatcher: DbDispatcher) -> None:
 async def on_shutdown(dispatcher: DbDispatcher) -> None:
     await dispatcher.storage.close()
     await dispatcher.storage.wait_closed()
-
-
-if __name__ == "__main__":
-    dp.set_db_conn(conn=setup_db(settings))
-    executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
